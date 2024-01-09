@@ -1,0 +1,14 @@
+.error-border {
+    border-color: red;
+}
+
+.error-label {
+    color: red;
+}
+
+.error {
+    color: red;
+    margin: 0;
+    font-size: 8px;
+    opacity: 0;
+}
