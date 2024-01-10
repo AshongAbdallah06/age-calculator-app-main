@@ -1,66 +1,117 @@
 const checkButton = document.querySelector('.check-btn');
-const day = document.querySelector('.dd-input');
-const month = document.querySelector('.mm-input');
-const year = document.querySelector('.yy-input');
+
+// Labels 
+const dayLabel = document.querySelector('.dd-label');
+const monthLabel = document.querySelector('.mm-label');
+const yearLabel = document.querySelector('.yy-label');
+
+
+// Inputs
+const inputDay = document.querySelector('.dd-input');
+const inputMonth = document.querySelector('.mm-input');
+const inputYear = document.querySelector('.yy-input');
+
+// Outputs
 let yearResult = document.querySelector('.yy-result');
 let monthResult = document.querySelector('.mm-result');
 let dayResult = document.querySelector('.dd-result');
-let dayError = document.querySelector('.dd-error');
-let monthError = document.querySelector('.mm-error');
-let yearError = document.querySelector('.yy-error');
 
-function validateField(value, max, errorContainer, errorMessage) {
-    if (value === '') {
-        errorContainer.innerHTML = 'This field is required';
-        return false;
-    } else if (Number(value) > max) {
-        errorContainer.innerHTML = errorMessage;
-        return false;
+// Errors
+let day_error = document.querySelector('.dd-error');
+let month_error = document.querySelector('.mm-error');
+let year_error = document.querySelector('.yy-error');
+
+let isValid = false;
+
+
+inputDay.addEventListener("input", e => {
+    if (+inputDay.value > 31  || !+inputDay.value.match(/^[0-9]{1,2}$/)) {
+        day_error.textContent = "Must be a valid day";
+        inputDay.classList.add('error-border');
+        dayLabel.classList.add('error-label');
+        isValid = false;
+        return
     } else {
-        errorContainer.innerHTML = '';
-        return true;
-    }
-}
-
-function checkInputs() {
-    const dayIsValid = validateField(day.value, 30, dayError, 'Must be a valid day');
-    const monthIsValid = validateField(month.value, 12, monthError, 'Must be a valid month');
-    const yearIsValid = validateField(year.value, 2024, yearError, 'Must be in the past');
-
-    if (dayIsValid) {
-        document.querySelector('.dd-label').classList.remove('error-label');
-        day.classList.remove('error-border');
-        document.querySelector('.dd-error').style.opacity = '0';
-        dayResult.innerHTML = 2 + Number(day.value);
-    } else {
-        document.querySelector('.dd-label').classList.add('error-label');
-        day.classList.add('error-border');
-        document.querySelector('.dd-error').style.opacity = '1';
+        day_error.textContent = "";
+        inputDay.classList.remove('error-border')
+        dayLabel.classList.remove('error-label');
+        isValid = true;
     }
 
-    if (monthIsValid) {
-        document.querySelector('.mm-label').classList.remove('error-label');
-        month.classList.remove('error-border');
-        document.querySelector('.mm-error').style.opacity = '0';
-        monthResult.innerHTML = 12 - month.value;
+    if (+inputDay.value === 0) {
+        isValid = false;
+        day_error.textContent = "This field is required";
+        dayLabel.classList.add('error-label');
+        isValid = false;
+        return
+    }
+})
+
+inputMonth.addEventListener("input", e => {
+    if (+inputMonth.value > 12 || !+inputMonth.value.match(/^[0-9]{1,2}$/)) {
+        month_error.textContent = "Must be a valid month";
+        inputMonth.classList.add('error-border');
+        monthLabel.classList.add('error-label');
+        isValid = false;
+        return
     } else {
-        document.querySelector('.mm-label').classList.add('error-label');
-        month.classList.add('error-border');
-        document.querySelector('.mm-error').style.opacity = '1';
+        month_error.textContent = "";
+        inputMonth.classList.remove('error-border')
+        monthLabel.classList.remove('error-label');
+        isValid = true;
     }
 
-    if (yearIsValid) {
-        document.querySelector('.yy-label').classList.remove('error-label');
-        year.classList.remove('error-border');
-        document.querySelector('.yy-error').style.opacity = '0';
-        yearResult.innerHTML = 2024 - year.value;
-    } else {
-        document.querySelector('.yy-label').classList.add('error-label');
-        year.classList.add('error-border');
-        document.querySelector('.yy-error').style.opacity = '1';
+    if (+inputMonth.value === 0) {
+        isValid = false;
+        month_error.textContent = "This field is required";
+        monthLabel.classList.add('error-label');
+        isValid = false;
+        return
     }
-}
+})
+
+inputYear.addEventListener("input", e => {
+    if (+inputYear.value > new Date().getFullYear() - 1 || !+inputYear.value.match(/^[0-9]{4}$/)) {
+        year_error.textContent = "Must be a valid day";
+        inputYear.classList.add('error-border');
+        yearLabel.classList.add('error-label');
+        isValid = false;
+        return
+    } else {
+        year_error.textContent = "";
+        inputYear.classList.remove('error-border');
+        yearLabel.classList.remove('error-label');
+        isValid = true;
+    }
+
+    if (+inputYear.value === 0) {
+        isValid = false;
+        year_error.textContent = "This field is required";
+        yearLabel.classList.add('error-label');
+        isValid = false;
+        return
+    }
+})
+
+
 
 checkButton.addEventListener('click', () => {
-    checkInputs();
-});
+    if (isValid) {
+        let birthday = `${inputMonth.value}/${inputDay.value}/${inputYear.value}`
+
+        let birthdayObj  = new Date(birthday)
+        let ageDiffMill = Date.now() - birthdayObj;
+        let ageDate = new Date(ageDiffMill);
+        let ageYears = ageDate.getFullYear() - 1970;
+        let ageMonths = ageDate.getMonth();  // Months are zero-based
+        let ageDays = ageDate.getDate();    // Get the day of the month
+
+        console.log(ageYears)
+
+        yearResult.textContent = `${ageYears}`;
+        monthResult.textContent = ageMonths;
+        dayResult.textContent = ageDays;
+
+        console.log(birthday)
+    }
+})

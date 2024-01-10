@@ -42,7 +42,7 @@ main {
 }
 
 .inputs-container {
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 label {
@@ -97,6 +97,11 @@ input::placeholder {
     padding: 10px;
     cursor: pointer;
     border-radius: 100px;
+    transition: background-color 0.1s;
+}
+
+.check-btn:hover {
+    background-color: black;
 }
 
 .arrow-icon {
