@@ -19,7 +19,7 @@ main {
 }
 
 .container {
-    width: 235;
+    /* width: 235; */
     /* background-color: lightcoral; */
     display: flex;
     flex-direction: column;
