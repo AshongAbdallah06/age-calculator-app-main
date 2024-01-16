@@ -21,20 +21,20 @@
 
 	<main>
 		<div class="container">
-			<div class="i">
+			<div class="inputs">
 				<div class="inputs-container">
-					<label class="dd-label" for="dd">DAY</label>
-					<input type="number" max="31" min="01" placeholder="DD" class="input dd-input">
+					<label class="dd-label" for="day-input">DAY</label>
+					<input id="day-input" name="day-input" type="number" max="31" min="01" placeholder="DD" class="input dd-input">
 					<p class="error dd-error"></p>
 				</div>
 				<div class="inputs-container">
-					<label class="mm-label" for="mm">MONTH</label>
-					<input type="number" max="12" min="1" placeholder="MM" class="input mm-input">
+					<label class="mm-label" for="month-input">MONTH</label>
+					<input id="month-input" name="month-input" type="number" max="12" min="1" placeholder="MM" class="input mm-input">
 					<p class="error mm-error"></p>
 				</div>
 				<div class="inputs-container">
-					<label class="yy-label" for="yy">YEAR</label>
-					<input type="number" placeholder="YYYY" class="input yy-input">
+					<label class="yy-label" for="year-input">YEAR</label>
+					<input id="year-input" name="year-input" type="number" placeholder="YYYY" class="input yy-input">
 					<p class="error yy-error"></p>
 				</div>
 			</div>
@@ -50,13 +50,21 @@
 
 			<div class="result">
 				<div>
-					<span class="dash yy-result">-- </span>years
+					<p style="margin: 0;">
+					   <span class="dash yy-result">-- </span>years
+					</p>
 				</div>
+
 				<div>
-					<span class="dash mm-result">-- </span>months
+					<p style="margin: 0;">
+					   <span class="dash mm-result">-- </span>months
+					</p>
 				</div>
+
 				<div>
-					<span class="dash dd-result">-- </span>days
+					<p style="margin: 0;">
+					   <span class="dash dd-result">-- </span>days
+					</p>
 				</div>
 			
 			</div>
@@ -64,11 +72,12 @@
 
 		
 		</div>
-		<div class="attribution">
-			Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-			Coded by <a href="#">Ashong Abdallah</a>.
-		</div>	
 	</main>
+
+	<footer class="attribution">
+		Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+		Coded by <a href="https://www.frontendmentor.io/profile/AshongAbdallah06">Ashong Abdallah</a>.
+	</footer>	
 
 	<script src="index.js"></script>
 </body>
